@@ -12,12 +12,20 @@
             <div>{{ item.name }}</div>
             <div>₹{{ item.price }}</div>
           </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+  <button class="qty-btn" (click)="decreaseQuantity(item)">−</button>
+  <span>{{ item.quantity }}</span>
+  <button class="qty-btn" (click)="increaseQuantity(item)">+</button>
+</div>
+
           <button (click)="removeItem(i)">Remove</button>
         </li>
       </ul>
       
 
-  <p><strong>Total:</strong> ₹{{ total }}</p>
+ <div class="cart-total" style="margin-top: 20px; font-weight: bold;">
+  Total: ₹{{ totalPrice | number:'1.2-2' }}
+</div>
 
   <button (click)="clearCart()">Clear Cart</button>
 </div>

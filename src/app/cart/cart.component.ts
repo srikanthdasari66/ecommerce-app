@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class CartComponent {
   cartItems: any[] = [];
   total = 0;
-
+totalPrice: number = 0;
 
   constructor(private cartService:CartService){
 
@@ -34,5 +34,26 @@ export class CartComponent {
     console.log('Cart items:', this.cartItems);
   }
 
+increaseQuantity(item: any) {
+  item.quantity += 1;
+  this.cartService.saveToLocalStorage();
+  this.calculateTotal();
+}
+decreaseQuantity(item:any){
+    if (item.quantity > 1) {
+  item.quantity -= 1;
+  this.cartService.saveToLocalStorage();
+   this.calculateTotal();
+    }
+}
 
+// calculateTotal() {
+//   this.totalPrice = this.cartService.getTotal();
+// }
+
+calculateTotal() {
+  this.totalPrice = this.cartItems.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
+}
 }

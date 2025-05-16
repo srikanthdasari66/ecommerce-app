@@ -21,7 +21,7 @@ export class CartService {
     alert(this.cartItems.length);
   }
 
-  private saveToLocalStorage() {
+  public saveToLocalStorage() {
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
 
@@ -50,5 +50,7 @@ export class CartService {
     this.saveToLocalStorage();
   }
 
-
+getTotal(): number {
+  return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+}
 }
